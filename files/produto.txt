@@ -1,0 +1,4 @@
+Anemômetro Digital; WindTech; WT-200
+Veleta Meteorológica; WeatherTech; VT-500;
+Barômetro de Precisão; ClimaTech; CTB-100
+Termohigrômetro Digital; EnviroSys; AH-200
