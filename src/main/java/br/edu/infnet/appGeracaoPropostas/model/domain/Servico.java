@@ -2,32 +2,57 @@ package br.edu.infnet.appGeracaoPropostas.model.domain;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+@Entity
 public class Servico {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+	private String nome;	
+	private String descricao;
+	@ManyToMany(mappedBy="servicos")
+	private List<Projeto> projetos;
+	
+	
+	public Integer getId() {
+		return id;
+	}
 
-	private String nome;
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	private String descricao;
+
 	public String getDescricao() {
 		return descricao;
 	}
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
-	private List<Projeto> projetos;
+
 	public List<Projeto> getProjetos() {
 		return projetos;
 	}
+
 	public void setProjetos(List<Projeto> projetos) {
 		this.projetos = projetos;
 	}
-	
+
+	public Servico() {
+		
+	}
 	
 	public Servico(String nome, String descricao) {
 		setNome(nome);

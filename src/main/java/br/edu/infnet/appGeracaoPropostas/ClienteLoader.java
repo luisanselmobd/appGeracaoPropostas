@@ -18,7 +18,7 @@ public class ClienteLoader implements ApplicationRunner {
 	
 	@Autowired
 	private ClienteService clienteService;
-
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		FileReader file = new FileReader("files/cliente.txt");

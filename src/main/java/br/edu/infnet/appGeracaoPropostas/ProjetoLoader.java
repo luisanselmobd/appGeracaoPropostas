@@ -9,16 +9,27 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import br.edu.infnet.appGeracaoPropostas.model.domain.Cliente;
 import br.edu.infnet.appGeracaoPropostas.model.domain.Infraestrutura;
 import br.edu.infnet.appGeracaoPropostas.model.domain.Projeto;
+import br.edu.infnet.appGeracaoPropostas.model.service.InfraestruturaService;
+import br.edu.infnet.appGeracaoPropostas.model.service.ProdutoService;
 import br.edu.infnet.appGeracaoPropostas.model.service.ProjetoService;
+import br.edu.infnet.appGeracaoPropostas.model.service.ServicoService;
 @Order(8)
 @Component
 public class ProjetoLoader implements ApplicationRunner {
 	
 	@Autowired
 	private ProjetoService projetoService;
+	
+	@Autowired
+	private InfraestruturaService infraestruturaService;
+	
+	@Autowired
+	private ProdutoService produtoService;
+	
+	@Autowired
+	private ServicoService servicoService;
 
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -26,20 +37,23 @@ public class ProjetoLoader implements ApplicationRunner {
 		BufferedReader leitura = new BufferedReader(file);
 		String linha = leitura.readLine();
 		String[] informacoes = null;
-		Cliente clienteDeTeste = new Cliente("Cliente de teste PL");
-		Infraestrutura infraestruturaDeTeste = new Infraestrutura("Infra de teste", "00000, 00000", clienteDeTeste);
+		
 		
 		while(linha != null) {
 			informacoes = linha.split(";");
 			if(informacoes.length == 2) {
+				Infraestrutura infraestruturaDeTeste = infraestruturaService.obterItemAleatorio();
 				Projeto projeto = new Projeto(informacoes[0], informacoes[1], infraestruturaDeTeste);
+				projeto.setProdutos(produtoService.obterItensAleatorios());				
+				projeto.setServicos(servicoService.obterItensAleatorios());				
 				projetoService.incluir(projeto);
+				
 			}
 			linha = leitura.readLine();
 		}
 		
-		for(Projeto projeto : projetoService.obterLista()) {
-			System.out.println("PROJETO: " + projeto);
+  		for(Projeto projeto : projetoService.obterLista()) {
+  			System.out.println("PROJETO: " + projeto);
 		}
 
 		leitura.close();

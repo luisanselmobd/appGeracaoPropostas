@@ -1,23 +1,24 @@
 package br.edu.infnet.appGeracaoPropostas.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appGeracaoPropostas.model.domain.Projeto;
+import br.edu.infnet.appGeracaoPropostas.model.repositories.ProjetoRepository;
 
 @Service
 public class ProjetoService {
 
-	private Map<String, Projeto> mapa = new HashMap<String, Projeto>();
+	@Autowired
+	private ProjetoRepository projetoRepository;	
 	
 	public void incluir(Projeto projeto) {
-		mapa.put(projeto.getIdentificacao(), projeto);
+		projetoRepository.save(projeto);
 	}
 	
 	public Collection<Projeto> obterLista() {
-		return mapa.values();
+		return (Collection<Projeto>) projetoRepository.findAll();
 	}
 }

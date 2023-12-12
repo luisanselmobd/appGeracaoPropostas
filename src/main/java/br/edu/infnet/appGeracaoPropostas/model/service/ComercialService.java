@@ -1,23 +1,24 @@
 package br.edu.infnet.appGeracaoPropostas.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appGeracaoPropostas.model.domain.Comercial;
+import br.edu.infnet.appGeracaoPropostas.model.repositories.ComercialRepository;
 
 @Service
 public class ComercialService {
 
-	private Map<String, Comercial> mapa = new HashMap<String, Comercial>();
+	@Autowired
+	private ComercialRepository comercialRepository;	
 	
 	public void incluir(Comercial comercial) {
-		mapa.put(comercial.getEmail(), comercial);
+		comercialRepository.save(comercial);
 	}
 	
 	public Collection<Comercial> obterLista() {
-		return mapa.values();
+		return (Collection<Comercial>) comercialRepository.findAll();
 	}
 }

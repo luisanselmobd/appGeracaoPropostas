@@ -1,23 +1,23 @@
 package br.edu.infnet.appGeracaoPropostas.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appGeracaoPropostas.model.domain.Financeiro;
+import br.edu.infnet.appGeracaoPropostas.model.repositories.FinanceiroRepository;
 
 @Service
 public class FinanceiroService {
 
-	private Map<String, Financeiro> mapa = new HashMap<String, Financeiro>();
+	@Autowired
+	private FinanceiroRepository financeiroRepository;	
 	
 	public void incluir(Financeiro financeiro) {
-		mapa.put(financeiro.getEmail(), financeiro);
+		financeiroRepository.save(financeiro);
 	}
 	
 	public Collection<Financeiro> obterLista() {
-		return mapa.values();
+		return (Collection<Financeiro>) financeiroRepository.findAll();
 	}
 }

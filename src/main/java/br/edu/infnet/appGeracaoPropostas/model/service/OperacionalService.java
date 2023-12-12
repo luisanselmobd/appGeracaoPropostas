@@ -1,23 +1,22 @@
 package br.edu.infnet.appGeracaoPropostas.model.service;
 
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appGeracaoPropostas.model.domain.Operacional;
+import br.edu.infnet.appGeracaoPropostas.model.repositories.OperacionalRepository;
 
 @Service
 public class OperacionalService {
-
-	private Map<String, Operacional> mapa = new HashMap<String, Operacional>();
+	@Autowired
+	private OperacionalRepository operacionalRepository;
 	
 	public void incluir(Operacional operacional) {
-		mapa.put(operacional.getEmail(), operacional);
+		operacionalRepository.save(operacional);
 	}
 	
 	public Collection<Operacional> obterLista() {
-		return mapa.values();
+		return (Collection<Operacional>) operacionalRepository.findAll();
 	}
 }
