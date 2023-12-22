@@ -37,6 +37,10 @@ public class InfraestruturaService {
     return infraestruturas.get(indiceAleatorio);
 		    
 	}
+	
+	public void excluir(int id) {
+		infraestruturaRepository.deleteById(id);
+	}
 }
 
 

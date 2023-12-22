@@ -10,17 +10,24 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Infraestrutura {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 	private String nome;	
-	private String localizacao;	
+	@OneToOne(cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "idEndereco")
+	private Endereco endereco;
 	@ManyToOne
+	@JsonBackReference("cliente")
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;	
 	@OneToMany(mappedBy = "infraestrutura", cascade = CascadeType.ALL)
+	@JsonBackReference("projetos")
 	private List<Projeto> projetos;
 	
 	public Integer getId() {
@@ -39,12 +46,14 @@ public class Infraestrutura {
 		this.nome = nome;
 	}
 
-	public String getLocalizacao() {
-		return localizacao;
+
+
+	public Endereco getEndereco() {
+		return endereco;
 	}
 
-	public void setLocalizacao(String localizacao) {
-		this.localizacao = localizacao;
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	public Cliente getCliente() {
@@ -63,14 +72,14 @@ public class Infraestrutura {
 		this.projetos = projetos;
 	}
 
-	public Infraestrutura(String nome, String localizacao, Cliente cliente) {
+	public Infraestrutura(String nome, Endereco endereco, Cliente cliente) {
 		setNome(nome);
-		setLocalizacao(localizacao);
+		setEndereco(endereco);
 		setCliente(cliente);
 	}
 		
 	public String toString() {
-		return String.format("Nome: %s | Localização: %s | Cliente: %s", this.getNome(), this.getLocalizacao(), this.getCliente());
+		return String.format("Nome: %s | Endereço: %s | Cliente: %s", this.getNome(), this.getEndereco(), this.getCliente());
 	}
 	
 	public Infraestrutura() {

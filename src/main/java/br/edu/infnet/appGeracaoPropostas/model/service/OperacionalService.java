@@ -19,4 +19,8 @@ public class OperacionalService {
 	public Collection<Operacional> obterLista() {
 		return (Collection<Operacional>) operacionalRepository.findAll();
 	}
+	
+	public void excluir(int id) {
+		operacionalRepository.deleteById(id);
+	}
 }

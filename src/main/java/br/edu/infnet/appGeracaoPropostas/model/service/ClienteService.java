@@ -37,4 +37,7 @@ public class ClienteService {
 	    return clientes.get(indiceAleatorio);
 			    
 	}
+	public void excluir(int id) {
+		clienteRepository.deleteById(id);
+	}
 }

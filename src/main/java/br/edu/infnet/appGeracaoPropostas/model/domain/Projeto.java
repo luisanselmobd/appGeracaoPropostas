@@ -1,11 +1,7 @@
 package br.edu.infnet.appGeracaoPropostas.model.domain;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
 
+import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-import org.springframework.data.jpa.repository.Query;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 
 
@@ -28,11 +24,14 @@ public class Projeto {
 	private String nome;	
 	private String identificacao;
 	
-	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)	
+	@ManyToMany(cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+	@JsonBackReference("produtos")
 	private List<Produto> produtos;	
 	@ManyToMany(cascade = CascadeType.DETACH)
+	@JsonBackReference("servicos")
 	private List<Servico> servicos;	
 	@ManyToOne
+	@JsonBackReference("infraestrutura")
 	@JoinColumn(name = "infraestrutura_id")
 	private Infraestrutura infraestrutura;
 	

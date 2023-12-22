@@ -1,0 +1,1179 @@
+{
+	"info": {
+		"_postman_id": "47271352-1c23-42a2-ab56-74675b3dda27",
+		"name": "api - geraçãoPropostas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25756171"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obterItemAleatorio",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/obterItemAleatorio",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"obterItemAleatorio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/cliente/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    \r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        console.log(idAleatoria);\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Cliente API\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/cliente/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cliente",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Infraestrutura",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/infraestrutura/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"infraestrutura",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/infraestrutura/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    \r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        console.log(idAleatoria);\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/infraestrutura/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"infraestrutura",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Infra API\",\r\n    \"localizacao\": \" -00.0000, -00.0000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/infraestrutura/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"infraestrutura",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projeto",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/projeto/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projeto",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/projeto/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    \r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        console.log(idAleatoria);\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/projeto/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projeto",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Projeto API\",\r\n    \"identificacao\": \" ID000\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/projeto/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"projeto",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Produto",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produto/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produto",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obterItensAleatorios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produto/obterItensAleatorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produto",
+								"obterItensAleatorios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/produto/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    \r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        console.log(idAleatoria);\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/produto/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produto",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Produto API\",\r\n        \"marca\": \" Marca API\",\r\n        \"modelo\": \" Modelo API\",\r\n        \"alturaInstalacao\": 1.0,\r\n        \"quantidade\": 1.0,\r\n        \"unidadeMedida\": null\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/produto/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"produto",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Servico",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/servico/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"servico",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obterItensAleatorios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/servico/obterItensAleatorios",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"servico",
+								"obterItensAleatorios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/servico/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    \r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        console.log(idAleatoria);\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/servico/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"servico",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Serviço API\",\r\n        \"descricao\": \" Descrição do serviço API\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/servico/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"servico",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comercial",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comercial/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comercial",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+									"let lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+									"let json =  {\r",
+									"    \"nome\": pm.variables.replaceIn(\"{{$randomNamePrefix}}\") + \" \" + firstName + \" \" + lastName,\r",
+									"    \"email\": firstName.toLocaleLowerCase() + \".\" + lastName.toLocaleLowerCase() + \"@email.com\"\r",
+									"}\r",
+									"pm.collectionVariables.set(\"jsonPost\", JSON.stringify(json));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{jsonPost}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/comercial/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comercial",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/comercial/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/comercial/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"comercial",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Operacional",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/operacional/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"operacional",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+									"let lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+									"let json =  {\r",
+									"    \"nome\": pm.variables.replaceIn(\"{{$randomNamePrefix}}\") + \" \" + firstName + \" \" + lastName,\r",
+									"    \"email\": firstName.toLocaleLowerCase() + \".\" + lastName.toLocaleLowerCase() + \"@email.com\"\r",
+									"}\r",
+									"pm.collectionVariables.set(\"jsonPost\", JSON.stringify(json));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{jsonPost}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/operacional/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"operacional",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/operacional/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/operacional/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"operacional",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Financeiro",
+			"item": [
+				{
+					"name": "listar",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/financeiro/listar",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeiro",
+								"listar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let firstName = pm.variables.replaceIn(\"{{$randomFirstName}}\");\r",
+									"let lastName = pm.variables.replaceIn(\"{{$randomLastName}}\");\r",
+									"let json =  {\r",
+									"    \"nome\": pm.variables.replaceIn(\"{{$randomNamePrefix}}\") + \" \" + firstName + \" \" + lastName,\r",
+									"    \"email\": firstName.toLocaleLowerCase() + \".\" + lastName.toLocaleLowerCase() + \"@email.com\"\r",
+									"}\r",
+									"pm.collectionVariables.set(\"jsonPost\", JSON.stringify(json));\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{{jsonPost}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/financeiro/incluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeiro",
+								"incluir"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "excluir",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function fazerRequisicao() {\r",
+									"    return new Promise((resolve, reject) => {\r",
+									"        pm.sendRequest({\r",
+									"            method: 'GET',\r",
+									"            url: 'http://localhost:8080/api/financeiro/listar',\r",
+									"            headers: {\r",
+									"                'Content-Type': 'application/json',\r",
+									"                'Authorization': 'Bearer YourAccessToken'\r",
+									"            }\r",
+									"        }, (err, res) => {\r",
+									"            if (err) {\r",
+									"                reject(err);\r",
+									"            } else {\r",
+									"                resolve(res.json());\r",
+									"            }\r",
+									"        });\r",
+									"    });\r",
+									"}\r",
+									"\r",
+									"async function definirNumeroAleatorio() {\r",
+									"    try {\r",
+									"        const itens = await fazerRequisicao();\r",
+									"\r",
+									"        let ids = [];\r",
+									"        for (let item in itens) {\r",
+									"            ids.push(itens[item].id);\r",
+									"        }\r",
+									"\r",
+									"        var idAleatoria = ids[Math.floor(Math.random() * ids.length)];\r",
+									"        pm.collectionVariables.set(\"$numeroAleatorioId\", idAleatoria);\r",
+									"    } catch (error) {\r",
+									"        console.error(\"Error:\", error);\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"definirNumeroAleatorio();\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/financeiro/{{$numeroAleatorioId}}/excluir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"financeiro",
+								"{{$numeroAleatorioId}}",
+								"excluir"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "$numeroAleatorioId",
+			"value": "randomNumber"
+		},
+		{
+			"key": "jsonPost",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

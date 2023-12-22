@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Servico {
     @Id
@@ -15,6 +17,7 @@ public class Servico {
 	private String nome;	
 	private String descricao;
 	@ManyToMany(mappedBy="servicos")
+	@JsonBackReference("projetosServico")
 	private List<Projeto> projetos;
 	
 	

@@ -21,4 +21,8 @@ public class ProjetoService {
 	public Collection<Projeto> obterLista() {
 		return (Collection<Projeto>) projetoRepository.findAll();
 	}
+	
+	public void excluir(int id) {
+		projetoRepository.deleteById(id);
+	}
 }

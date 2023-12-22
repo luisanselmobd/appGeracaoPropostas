@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 @Entity
 public class Produto {
 	
@@ -20,6 +22,7 @@ public class Produto {
 	private float quantidade;	
 	private String unidadeMedida;
 	@ManyToMany(mappedBy="produtos")
+	@JsonBackReference("projetosProduto")
 	private List<Projeto> projetos;
 	
 

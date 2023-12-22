@@ -20,4 +20,7 @@ public class FinanceiroService {
 	public Collection<Financeiro> obterLista() {
 		return (Collection<Financeiro>) financeiroRepository.findAll();
 	}
+	public void excluir(int id) {
+		financeiroRepository.deleteById(id);
+	}
 }

@@ -7,7 +7,6 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.appGeracaoPropostas.model.domain.Infraestrutura;
 import br.edu.infnet.appGeracaoPropostas.model.domain.Servico;
 import br.edu.infnet.appGeracaoPropostas.model.repositories.ServicoRepository;
 
@@ -37,5 +36,9 @@ public class ServicoService {
 
 	    return servicos.subList(0, quantidadeAleatoria);
 			    
+	}
+	
+	public void excluir(int id) {
+		servicoRepository.deleteById(id);
 	}
 }

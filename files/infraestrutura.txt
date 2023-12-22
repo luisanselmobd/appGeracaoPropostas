@@ -1,4 +1,4 @@
-Parque Nacional do Iguaçu; -25.6900, -54.4400
-Praia de Ponta Negra; -5.8697, -35.1785
-Parque Nacional da Chapada Diamantina; -12.8275, -41.7641
-Orla de Copacabana; -22.9719, -43.1852
+Parque Nacional do Iguaçu;70002900
+Praia de Ponta Negra;01311200
+Parque Nacional da Chapada Diamantina;20231050
+Orla de Copacabana;69077000

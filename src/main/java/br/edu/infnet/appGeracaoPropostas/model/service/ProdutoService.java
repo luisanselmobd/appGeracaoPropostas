@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.appGeracaoPropostas.model.domain.Produto;
-import br.edu.infnet.appGeracaoPropostas.model.domain.Servico;
 import br.edu.infnet.appGeracaoPropostas.model.repositories.ProdutoRepository;
 
 @Service
@@ -34,8 +33,11 @@ public class ProdutoService {
 
 	    Random random = new Random();
 	    int quantidadeAleatoria = random.nextInt(produtos.size());
-
 	    return produtos.subList(0, quantidadeAleatoria);
 			    
+	}
+	
+	public void excluir(int id) {
+		produtoRepository.deleteById(id);
 	}
 }

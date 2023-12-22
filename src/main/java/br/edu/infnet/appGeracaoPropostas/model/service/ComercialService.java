@@ -21,4 +21,8 @@ public class ComercialService {
 	public Collection<Comercial> obterLista() {
 		return (Collection<Comercial>) comercialRepository.findAll();
 	}
+	
+	public void excluir(int id) {
+		comercialRepository.deleteById(id);
+	}
 }
